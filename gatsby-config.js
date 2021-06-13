@@ -41,5 +41,7 @@ module.exports = {
     `gatsby-plugin-offline`,
     "gatsby-transformer-remark",
     "gatsby-plugin-styled-components",
+    // Needs to be last in the array
+    "gatsby-plugin-netlify",
   ],
 }
