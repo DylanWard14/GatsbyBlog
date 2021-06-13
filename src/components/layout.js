@@ -8,6 +8,8 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
+import Img from "gatsby-image"
+import { useSpring, animated } from "react-spring"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
@@ -16,13 +18,13 @@ import "./layout.css"
 
 const MainLayout = styled.main`
   max-width: 90%;
-  margin: 0 auto;
+  margin: 1rem auto;
   display: grid;
   grid-template-columns: 3fr 1fr;
   grid-gap: 40px;
 `
 
-const Layout = ({ children }) => {
+const Layout = ({ children, location }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -30,12 +32,27 @@ const Layout = ({ children }) => {
           title
         }
       }
+      file(relativePath: { regex: "/bg/" }) {
+        childImageSharp {
+          fluid(maxWidth: 1000) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `)
+
+  const springProps = useSpring({
+    from: { height: location.pathname === "/" ? "100px" : "200px" },
+    to: { height: location.pathname === "/" ? "200px" : "100px" },
+  })
 
   return (
     <>
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+      <animated.div style={{ overflow: "hidden", ...springProps }}>
+        <Img fluid={data.file.childImageSharp.fluid} />
+      </animated.div>
       <MainLayout>
         <div>{children}</div>
         <Archive />
