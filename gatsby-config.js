@@ -3,6 +3,7 @@ module.exports = {
     title: `My Blog`,
     description: `A new blog`,
     author: `@gatsbyjs`,
+    siteUrl: "https://dreamy-ptolemy-1cc856.netlify.app",
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -26,11 +27,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `GatsbyBlog`,
+        short_name: `GBlog`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#524763`,
+        theme_color: `#524763`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
@@ -41,6 +42,8 @@ module.exports = {
     `gatsby-plugin-offline`,
     "gatsby-transformer-remark",
     "gatsby-plugin-styled-components",
+    "gatsby-plugin-netlify-cms",
+    "gatsby-plugin-sitemap",
     // Needs to be last in the array
     "gatsby-plugin-netlify",
   ],
